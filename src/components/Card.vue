@@ -1,24 +1,33 @@
 <template>
-  <div class="card">
+  <div class ="card">
     <div class="card-title" :style="{ backgroundColor: titleBackgroundColor }">
       <h3>{{ title }}</h3>
-      <strong> (Preço: R$ {{ price }} | Qtde : {{ amount }}) </strong>
+      <strong>
+        (Preço: R$ {{ item.price }}
+        <template v-if="showAmount">| Qtde : {{ item.amount }} </template> )</strong
+      >
     </div>
     <div class="card-form">
-      <input type="number" placeholder="Quantidade"/>
-      <button>{{ buttonText }}</button>
+      <input type="number" placeholder="Quantidade" v-model.number="amount" />
+      <button @click="clickButton">{{buttonText}}</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      amount: 0,
+    };
+  },
+  computed:{
+      showAmount(){
+          return !!this.item.amount && this.buttonText === 'Vender'
+      }
+  },
   props: {
     title: {
-      type: String,
-      required: true,
-    },
-    buttonText: {
       type: String,
       required: true,
     },
@@ -26,15 +35,19 @@ export default {
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    buttonText: String,
+    item: {
+      type: Object,
       required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
+    }
   },
+  methods:{
+      clickButton(){
+          const {item, amount} = this
+          this.$emit('click', {item, amount})
+          this.amount = 0
+      } 
+  }
 };
 </script>
 
@@ -55,7 +68,7 @@ export default {
 }
 
 .card-form input {
-  flex:1;
+  flex: 1;
   height: fit-content;
   border: 0;
   margin: 0 10px;

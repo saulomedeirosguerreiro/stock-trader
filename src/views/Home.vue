@@ -12,13 +12,19 @@
       </p>
     </div>
     <div class="info-balance">
-        <span>Seu Saldo: R$ 10.000</span>
+        <span>Seu Saldo: R$ {{saldo}}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  computed:{
+    saldo(){
+      return this.$store.state.stock.saldo
+    }
+  }
+};
 </script>
 
 <style scoped>

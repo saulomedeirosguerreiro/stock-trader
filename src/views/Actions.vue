@@ -1,39 +1,38 @@
 <template>
   <div class="actions">
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-      <Card title="BMW" buttonText="Vender" titleBackgroundColor="rgb(63, 167, 63)" :price="10" :amount="1"/>
-   
+    <Card
+      v-for="(action, index) in actions"
+      :key="index"
+      :title="action.name"
+      buttonText="Comprar"
+      titleBackgroundColor="rgb(63, 167, 63)"   
+      :item="action" 
+      @click="buy"   
+    />
   </div>
 </template>
 
 <script>
-import Card from '../components/Card';
+import Card from "../components/Card";
+import { mapActions } from "vuex";
 export default {
-  components:{
-      Card
-  }
+  components: {
+    Card,
+  },
+  computed: {
+      actions(){
+          return this.$store.state.stockexchange.actions
+      }
+  },
+  methods: {
+    ...mapActions(["buy"])
+  },
 };
 </script>
 
 <style  scoped>
-
-    .actions{
-          display: flex;
-          flex-wrap: wrap;
-    }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>

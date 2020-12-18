@@ -3,16 +3,16 @@
       <div class="menu-left">
         <ul>
           <span><strong>STOCK</strong>TRADER</span>
-          <li><a href="/">INÍCIO</a></li>
-          <li><a href="/portfolio">PORTIFÓLIO</a></li>
-          <li><a href="/actions">AÇÕES</a></li>
+          <li><router-link to="/">INÍCIO</router-link ></li>
+          <li><router-link to="/portfolio">PORTIFÓLIO</router-link ></li>
+          <li><router-link to="/actions">AÇÕES</router-link ></li>
         </ul>
       </div>
       <div class="menu-right">
          <ul>
-          <li><a href="#home">FINALIZAR DIA</a></li>
-          <li><a href="#news">SALVAR &amp; CARREGAR</a></li>
-          <li><span>Saldo: R$ 10.000</span></li>
+          <li><router-link to="#finish">FINALIZAR DIA</router-link></li>
+          <li><router-link to="#save">SALVAR &amp; CARREGAR</router-link></li>
+          <li><span>Saldo: R$ {{saldo}}</span></li>
         </ul>
       </div>
     </header>
@@ -20,7 +20,11 @@
 
 <script>
     export default {
-        
+        computed:{
+           saldo(){
+             return this.$store.state.stock.saldo
+           }
+        }
     }
 </script>
 
